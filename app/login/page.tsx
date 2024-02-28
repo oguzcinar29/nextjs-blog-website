@@ -5,7 +5,6 @@ import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import { redirect, useRouter } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
-import { authOptions } from "../api/auth/[...nextauth]/route";
 import { BlogContext, blogContextType } from "@/components/context/BlogContext";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";

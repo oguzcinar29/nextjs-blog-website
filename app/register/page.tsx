@@ -6,10 +6,9 @@ import React, { useState } from "react";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import { useRouter } from "next/navigation";
-import { getServerSession } from "next-auth";
+
 import { redirect } from "next/navigation";
 import { getSession, useSession } from "next-auth/react";
-import { authOptions } from "../api/auth/[...nextauth]/route";
 
 type infoType = {
   name: string;
