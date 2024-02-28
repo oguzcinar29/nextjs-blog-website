@@ -13,7 +13,7 @@ type infoType = {
   password: string;
 };
 
-export default function page() {
+export default function Register() {
   const [info, setInfo] = useState<infoType>({
     username: "",
     email: "",

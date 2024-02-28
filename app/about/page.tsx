@@ -1,6 +1,4 @@
-import React from "react";
-
-export default function page() {
+export default function About() {
   return (
     <div>
       <div className="flex justify-between items-center gap-10 ">
@@ -35,7 +33,7 @@ export default function page() {
         <div className="w-5/12">
           <img
             src="https://github.com/safak/next14-tutorial/blob/main/public/about.png?raw=true"
-            alt=""
+            alt="asd"
           />
         </div>
       </div>

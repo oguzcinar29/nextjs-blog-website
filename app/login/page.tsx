@@ -7,7 +7,7 @@ type infoType = {
   password: string;
 };
 
-export default function page() {
+export default function Login() {
   const [info, setInfo] = useState<infoType>({
     email: "",
     password: "",
