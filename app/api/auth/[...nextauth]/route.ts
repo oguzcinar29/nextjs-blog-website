@@ -8,7 +8,7 @@ import User from "@/models/user";
 
 import bcrypt from "bcrypt";
 
-export const authOptions = {
+const authOptions = {
   providers: [
     CredentialsProvider({
       name: "credentials",
