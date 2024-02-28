@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import { AuthProvider } from "./Providers";
+import BlogProvider from "@/components/context/BlogContext";
 
 export const metadata: Metadata = {
   title: "Blog app",
@@ -21,13 +22,15 @@ export default function RootLayout({
     <html lang="en">
       <body className={font.className}>
         <AuthProvider>
-          <div className="bg-[#070F2B]">
-            <div className=" text-white w-8/12 m-auto h-screen max-w-screen-2xl flex flex-col justify-between">
-              <Navbar />
-              {children}
-              <Footer />
+          <BlogProvider>
+            <div className="bg-[#070F2B]">
+              <div className=" text-white w-8/12 m-auto h-screen max-w-screen-2xl flex flex-col justify-between">
+                <Navbar />
+                {children}
+                <Footer />
+              </div>
             </div>
-          </div>
+          </BlogProvider>
         </AuthProvider>
       </body>
     </html>

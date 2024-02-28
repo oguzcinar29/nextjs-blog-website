@@ -1,13 +1,13 @@
 "use client";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import { useState } from "react";
-import { useAppContext } from "../context/BlogContext";
+import { useContext, useState } from "react";
+import { BlogContext, blogContextType } from "../context/BlogContext";
 
 export default function Navbar() {
-  const { link, setLink, hey } = useAppContext();
+  const { link, setLink } = useContext<blogContextType>(BlogContext);
 
-  console.log(hey);
+  console.log(link);
 
   const changeHover = (e: any) => {
     const link = e.target.textContent;
@@ -87,7 +87,14 @@ export default function Navbar() {
             </Link>
           )}
           {typeof session?.user?.email !== "undefined" && (
-            <button onClick={() => signOut()}>logout</button>
+            <button
+              onClick={() => {
+                setLink("Homepage");
+                signOut();
+              }}
+            >
+              logout
+            </button>
           )}
         </div>
       </div>

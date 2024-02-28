@@ -1,16 +1,22 @@
 "use client";
 import { error } from "console";
-import { signIn } from "next-auth/react";
+import { getServerSession } from "next-auth";
+import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-
+import { redirect, useRouter } from "next/navigation";
+import React, { useContext, useEffect, useState } from "react";
+import { authOptions } from "../api/auth/[...nextauth]/route";
+import { BlogContext, blogContextType } from "@/components/context/BlogContext";
+import Alert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
 type infoType = {
   email: string;
   password: string;
 };
 
 export default function Login() {
+  const { link, setLink } = useContext<blogContextType>(BlogContext);
+
   const [info, setInfo] = useState<infoType>({
     email: "",
     password: "",
@@ -35,9 +41,10 @@ export default function Login() {
         redirect: false,
       });
       if (res.error) {
-        setErr("Invalid Credentials");
+        setErr("Invalid Value! Try Again.");
         return;
       } else {
+        setLink("Homepage");
         router.push("/");
         router.refresh();
       }
@@ -47,39 +54,46 @@ export default function Login() {
   };
 
   return (
-    <div className="flex justify-center items-center">
-      <form
-        onSubmit={loginSubmit}
-        className="flex flex-col gap-6 bg-[#535C91] w-1/3 p-7 text-center rounded-sm "
-      >
-        <h1 className="text-3xl font-extrabold">Login</h1>
-        <input
-          onChange={infoChange}
-          value={info?.email}
-          type="text"
-          placeholder="Email"
-          name="email"
-          className="bg-[#070F2B] p-3 text-white  w-full  rounded-sm "
-        />
-        <input
-          onChange={infoChange}
-          value={info?.password}
-          name="password"
-          type="password"
-          placeholder="Password"
-          className="bg-[#070F2B] p-3 text-white w-full  rounded-sm "
-        />
-        <button type="submit" className="bg-[#1B1A55] pt-3 pb-3 rounded-sm">
-          Sign in
-        </button>
-        {err && <h2>{err}</h2>}
-        <span className="font-light">
-          Dont have an account ?
-          <Link className="font-extrabold pl-1" href="/register">
-            Register
-          </Link>
-        </span>
-      </form>
-    </div>
+    <>
+      {err && (
+        <Stack sx={{ width: "30%", margin: "auto" }} spacing={2}>
+          <Alert severity="error">{err}</Alert>
+        </Stack>
+      )}
+      <div className="flex justify-center items-center">
+        <form
+          onSubmit={loginSubmit}
+          className="flex flex-col gap-6 bg-[#535C91] w-1/3 p-7 text-center rounded-sm "
+        >
+          <h1 className="text-3xl font-extrabold">Login</h1>
+          <input
+            onChange={infoChange}
+            value={info?.email}
+            type="text"
+            placeholder="Email"
+            name="email"
+            className="bg-[#070F2B] p-3 text-white  w-full  rounded-sm "
+          />
+          <input
+            onChange={infoChange}
+            value={info?.password}
+            name="password"
+            type="password"
+            placeholder="Password"
+            className="bg-[#070F2B] p-3 text-white w-full  rounded-sm "
+          />
+          <button type="submit" className="bg-[#1B1A55] pt-3 pb-3 rounded-sm">
+            Sign in
+          </button>
+          {err && <h2>{err}</h2>}
+          <span className="font-light">
+            Dont have an account ?
+            <Link className="font-extrabold pl-1" href="/register">
+              Register
+            </Link>
+          </span>
+        </form>
+      </div>
+    </>
   );
 }
