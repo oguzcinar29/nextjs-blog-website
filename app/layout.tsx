@@ -3,6 +3,7 @@ import { Nunito } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
+import { AuthProvider } from "./Providers";
 
 export const metadata: Metadata = {
   title: "Blog app",
@@ -19,13 +20,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
-        <div className="bg-[#070F2B]">
-          <div className=" text-white w-8/12 m-auto h-screen max-w-screen-2xl flex flex-col justify-between">
-            <Navbar />
-            {children}
-            <Footer />
+        <AuthProvider>
+          <div className="bg-[#070F2B]">
+            <div className=" text-white w-8/12 m-auto h-screen max-w-screen-2xl flex flex-col justify-between">
+              <Navbar />
+              {children}
+              <Footer />
+            </div>
           </div>
-        </div>
+        </AuthProvider>
       </body>
     </html>
   );

@@ -8,14 +8,14 @@ import Stack from "@mui/material/Stack";
 import { useRouter } from "next/navigation";
 
 type infoType = {
-  username: string;
+  name: string;
   email: string;
   password: string;
 };
 
 export default function Register() {
   const [info, setInfo] = useState<infoType>({
-    username: "",
+    name: "",
     email: "",
     password: "",
   });
@@ -63,10 +63,10 @@ export default function Register() {
           <h1 className="text-3xl font-extrabold">Register</h1>
           <input
             onChange={infoChange}
-            value={info?.username}
+            value={info?.name}
             type="text"
             placeholder="Username"
-            name="username"
+            name="name"
             required
             className="bg-[#070F2B] p-3 text-white  w-full  rounded-sm "
           />

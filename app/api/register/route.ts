@@ -7,7 +7,7 @@ const saltRounds = 11;
 
 export async function POST(request: Request) {
   try {
-    const { username, email, password } = await request.json();
+    const { name, email, password } = await request.json();
     await connectMongoDB();
 
     const newPass = await bcrypt.hash(password, saltRounds);
@@ -24,7 +24,7 @@ export async function POST(request: Request) {
       );
     } else {
       await User.create({
-        username: username,
+        name: name,
         email: email,
         password: newPass,
       });
