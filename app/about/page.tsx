@@ -11,7 +11,7 @@ export default function About() {
           </h1>
           <p className="leading-snug font-light">
             We create digital ideas that are bigger, bolder ,braver and better.
-            We belive in good ideas flexbility and precission. We're world's Our
+            We belive in good ideas flexbility and precission. We are worlds Our
             Special Team best consulting & finance solution provider. Wide range
             of web and software development services.
           </p>

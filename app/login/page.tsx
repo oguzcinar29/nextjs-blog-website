@@ -42,7 +42,7 @@ export default function Login() {
         />
         <button className="bg-[#1B1A55] pt-3 pb-3 rounded-sm">Sign in</button>
         <span className="font-light">
-          Don't have an account ?
+          Dont have an account ?
           <Link className="font-extrabold pl-1" href="/register">
             Register
           </Link>
