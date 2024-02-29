@@ -73,6 +73,19 @@ export default function Navbar() {
           >
             Blog
           </Link>
+          {typeof session?.user?.email !== "undefined" && (
+            <Link
+              className={
+                link === "Write"
+                  ? "bg-white rounded-3xl p-3 pr-7 pl-7 text-black"
+                  : "text-white p-3 pr-7 pl-7"
+              }
+              onClick={changeHover}
+              href="/write"
+            >
+              Write
+            </Link>
+          )}
           {typeof session?.user?.email === "undefined" && (
             <Link
               className={

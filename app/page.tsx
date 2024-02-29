@@ -1,12 +1,25 @@
 "use client";
-
+import { useSession } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
+  const { data: session } = useSession();
+
+  const imagePath = session?.user?.image || "";
+
   return (
-    <div className="">
+    <div className="mt-12 mb-14">
       <div className="flex justify-between items-center gap-10 ">
         <div className="w-7/12 flex flex-col gap-5">
+          {imagePath && (
+            <Image
+              src={imagePath} // Use the formattedImagePath
+              alt="User Image"
+              width={200} // Adjust width and height as needed
+              height={200}
+            />
+          )}
           <h1 className="text-white text-7xl font-extrabold leading-tight">
             Creative Thoughts Agency.
           </h1>
@@ -17,13 +30,13 @@ export default function Home() {
           </p>
           <div className="flex gap-4">
             <Link
-              className="bg-blue-500 p-6  rounded-lg pt-4 pb-4"
+              className="bg-blue-500 p-6 rounded-lg pt-4 pb-4"
               href="/about"
             >
               Learn More
             </Link>
             <Link
-              className="bg-white text-black p-6  rounded-lg pt-4 pb-4"
+              className="bg-white text-black p-6 rounded-lg pt-4 pb-4"
               href="/contact"
             >
               Contact

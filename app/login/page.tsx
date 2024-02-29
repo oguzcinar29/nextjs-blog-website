@@ -59,12 +59,13 @@ export default function Login() {
           <Alert severity="error">{err}</Alert>
         </Stack>
       )}
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center mt-20 mb-40">
         <form
           onSubmit={loginSubmit}
           className="flex flex-col gap-6 bg-[#535C91] w-1/3 p-7 text-center rounded-sm "
         >
           <h1 className="text-3xl font-extrabold">Login</h1>
+
           <input
             onChange={infoChange}
             value={info?.email}

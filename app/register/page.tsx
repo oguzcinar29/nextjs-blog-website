@@ -6,7 +6,6 @@ import React, { useState } from "react";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import { useRouter } from "next/navigation";
-
 import { redirect } from "next/navigation";
 import { getSession, useSession } from "next-auth/react";
 
@@ -19,7 +18,7 @@ type infoType = {
 export default function Register() {
   const { data: session } = useSession();
 
-  if (typeof session?.user?.email === "undefined") redirect("/");
+  if (typeof session?.user?.email !== "undefined") redirect("/");
 
   const [info, setInfo] = useState<infoType>({
     name: "",
@@ -38,13 +37,27 @@ export default function Register() {
     });
   };
 
+  const [img, setImg] = useState<File>();
+
+  function handleFileUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    if (!e.target.files || e.target.files.length === 0) {
+      return;
+    }
+    setImg(e.target.files[0]);
+  }
+
   const registerSubmit = async (e: any) => {
     e.preventDefault();
+
     try {
+      const data = new FormData();
+      data.append("name", info?.name);
+      data.append("email", info?.email);
+      data.append("password", info?.password);
+      data.set("file", img);
       const res = await fetch(`${apiURL}/api/register`, {
         method: "POST",
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify(info),
+        body: data,
       });
       if (!res.ok) {
         res.json().then((message) => setErr(message.message));
@@ -55,6 +68,9 @@ export default function Register() {
       console.log(err);
     }
   };
+
+  console.log(info);
+
   return (
     <>
       {err && (
@@ -62,12 +78,13 @@ export default function Register() {
           <Alert severity="error">{err}</Alert>
         </Stack>
       )}
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center mt-20 mb-20">
         <form
           onSubmit={registerSubmit}
           className="flex flex-col gap-6 bg-[#535C91] w-1/3 p-7 text-center rounded-sm "
         >
           <h1 className="text-3xl font-extrabold">Register</h1>
+          <input type="file" name="file" onChange={handleFileUpload} />
           <input
             onChange={infoChange}
             value={info?.name}
@@ -95,9 +112,12 @@ export default function Register() {
             placeholder="Password"
             className="bg-[#070F2B] p-3 text-white w-full  rounded-sm "
           />
-          <button type="submit" className="bg-[#1B1A55] pt-3 pb-3 rounded-sm">
-            Sign Up
-          </button>
+          <input
+            type="submit"
+            className="bg-[#1B1A55] pt-3 pb-3 rounded-sm cursor-pointer"
+            name="value"
+            value="Sign Up"
+          />
           <span className="font-light">
             Do you have an account ?
             <Link className="font-extrabold pl-1" href="/login">

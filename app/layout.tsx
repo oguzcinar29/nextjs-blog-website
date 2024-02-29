@@ -24,7 +24,7 @@ export default function RootLayout({
         <AuthProvider>
           <BlogProvider>
             <div className="bg-[#070F2B]">
-              <div className=" text-white w-8/12 m-auto h-screen max-w-screen-2xl flex flex-col justify-between">
+              <div className=" text-white w-8/12 m-auto h-screen max-w-screen-2xl flex flex-col ">
                 <Navbar />
                 {children}
                 <Footer />
