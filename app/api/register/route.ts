@@ -16,14 +16,17 @@ export async function POST(request: NextRequest) {
     const name = data.get("name") as string;
     const file: File | null = data.get("file") as unknown as File;
 
-    console.log(file);
+    console.log(typeof file.name);
 
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
+    if (typeof file.name !== "undefined") {
+      console.log("21");
 
-    const path = join("app/api", "images", file.name);
-    await writeFile(path, buffer);
+      const bytes = await file.arrayBuffer();
+      const buffer = Buffer.from(bytes);
 
+      const path = join("public", "images", file.name);
+      await writeFile(path, buffer);
+    }
     await connectMongoDB();
     const newPass = await bcrypt.hash(password, saltRounds);
 
@@ -40,7 +43,7 @@ export async function POST(request: NextRequest) {
         name: name,
         email: email,
         password: newPass,
-        image: `/images/${file.name}`,
+        image: typeof file.name !== "undefined" ? `/images/${file.name}` : null,
       });
       return NextResponse.json({ message: "User created" }, { status: 200 });
     }
