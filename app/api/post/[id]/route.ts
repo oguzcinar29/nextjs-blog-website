@@ -2,7 +2,7 @@ import { connectMongoDB } from "@/lib/mongodb";
 import Post from "@/models/post";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function DELETE(request: NextRequest, { params }) {
+export async function DELETE(request: NextRequest, { params }: any) {
   const { id } = params;
   console.log(id);
   try {
