@@ -9,7 +9,7 @@ import { useSession } from "next-auth/react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { apiURL } from "@/url";
-export default function page({ params }) {
+export default function SingleBlogPost({ params }) {
   const { id } = params;
 
   const { posts, users } = useContext<blogContextType>(BlogContext);

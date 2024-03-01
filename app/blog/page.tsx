@@ -3,7 +3,7 @@ import { BlogContext, blogContextType } from "@/components/context/BlogContext";
 import Posts from "@/components/posts/Posts";
 import React, { useContext } from "react";
 
-export default function page() {
+export default function Blog() {
   const { posts } = useContext<blogContextType>(BlogContext);
 
   return (
