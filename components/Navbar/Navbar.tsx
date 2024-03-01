@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useContext, useState } from "react";
 import { BlogContext, blogContextType } from "../context/BlogContext";
 
+// add admin link to manage everything from there
+
 export default function Navbar() {
   const { link, setLink } = useContext<blogContextType>(BlogContext);
 
