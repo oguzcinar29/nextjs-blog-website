@@ -1,11 +1,19 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import { Promise } from "es6-promise";
 
-import { SessionStrategy } from "next-auth";
+import { DefaultSession, SessionStrategy } from "next-auth";
 import { connectMongoDB } from "@/lib/mongodb";
 import User from "@/models/user";
 
 import bcrypt from "bcrypt";
+
+declare module "next-auth" {
+  interface Session {
+    user: DefaultSession["user"] & {
+      id: string;
+    };
+  }
+}
 
 export const authOptions = {
   providers: [
@@ -46,6 +54,20 @@ export const authOptions = {
       },
     }),
   ],
+  callbacks: {
+    session: async ({ session, token }) => {
+      if (session?.user) {
+        session.user.id = token.sub;
+      }
+      return session;
+    },
+    jwt: async ({ user, token }) => {
+      if (user) {
+        token.sub = user.id;
+      }
+      return token;
+    },
+  },
   session: {
     strategy: "jwt" as SessionStrategy,
   },

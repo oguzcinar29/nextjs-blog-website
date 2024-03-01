@@ -1,8 +1,8 @@
 export default function About() {
   return (
-    <div className="mt-16 mb-16">
-      <div className="flex justify-between items-center gap-10 ">
-        <div className="w-7/12 flex flex-col gap-7">
+    <div className="mt-16 mb-17">
+      <div className=" flex justify-between items-center gap-10 ">
+        <div className=" w-7/12 flex flex-col gap-7">
           <h3 className="text-[#535C91] text-2xl font-extrabold ">
             About Agency
           </h3>

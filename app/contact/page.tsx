@@ -1,6 +1,6 @@
 export default function page() {
   return (
-    <div className="flex mt-20 mb-28 ">
+    <div className="flex mt-20 mb-31 ">
       <div>
         <img
           className="w-4/5 "
