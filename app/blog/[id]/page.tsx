@@ -27,7 +27,7 @@ export default function SingleBlogPost({ params }) {
       if (!res.ok) {
         throw new Error("Failed to delete post");
       } else {
-        router.push("/");
+        router.push("/blog");
         router.refresh();
       }
     } catch (err) {

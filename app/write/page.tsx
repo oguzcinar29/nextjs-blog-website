@@ -3,7 +3,7 @@
 import { BlogContext } from "@/components/context/BlogContext";
 import { apiURL } from "@/url";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { FormEventHandler, useContext, useState } from "react";
 
 export default function Write() {
@@ -48,7 +48,6 @@ export default function Write() {
       if (!res.ok) {
         throw new Error("Failed to send data");
       } else {
-        setLink("Blog");
         router.push("/blog");
         router.refresh();
       }

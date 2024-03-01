@@ -106,7 +106,7 @@ export default function Navbar() {
                 signOut();
               }}
             >
-              logout
+              Logout
             </button>
           )}
         </div>

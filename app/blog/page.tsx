@@ -1,10 +1,25 @@
 "use client";
 import { BlogContext, blogContextType } from "@/components/context/BlogContext";
 import Posts from "@/components/posts/Posts";
-import React, { useContext } from "react";
+import { apiURL } from "@/url";
+import React, { useContext, useEffect, useState } from "react";
 
 export default function Blog() {
-  const { posts } = useContext<blogContextType>(BlogContext);
+  const [posts, setPosts] = useState<any>([]);
+
+  const getAllPost = async () => {
+    try {
+      const data = await fetch(`${apiURL}/api/post`, {
+        cache: "no-cache",
+      });
+      data.json().then((data) => setPosts(data.data));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(() => {
+    getAllPost();
+  }, []);
 
   return (
     <div className=" w-full max-h-full pt-10 pb-10">
