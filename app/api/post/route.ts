@@ -29,11 +29,6 @@ export async function POST(request: NextRequest) {
     const userId = data.get("userId");
     let blob: any;
     if (typeof file.name !== "undefined") {
-      const bytes = await file.arrayBuffer();
-      const buffer = Buffer.from(bytes);
-
-      const path = join("public", "postImages", file.name);
-      await writeFile(path, buffer);
       blob = await put(file.name, file, {
         access: "public",
       });
