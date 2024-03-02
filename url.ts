@@ -1,1 +1,1 @@
-export const apiURL = "https://nextjs-blog-website-chi.vercel.app/";
+export const apiURL = "https://nextjs-blog-website-chi.vercel.app";
