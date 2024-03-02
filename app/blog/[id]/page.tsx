@@ -9,6 +9,8 @@ import { useSession } from "next-auth/react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { apiURL } from "@/url";
+import Link from "next/link";
+import { set } from "mongoose";
 export default function SingleBlogPost({ params }) {
   const { id } = params;
 
@@ -40,6 +42,7 @@ export default function SingleBlogPost({ params }) {
 
   const router = useRouter();
   const { data: session } = useSession();
+  const { editId, setEditId } = useContext(BlogContext);
 
   const deletePost = async () => {
     try {
@@ -90,9 +93,14 @@ export default function SingleBlogPost({ params }) {
                 <button onClick={deletePost} className="text-red-500">
                   <DeleteIcon />
                 </button>
-                <button>
+                <Link
+                  onClick={() => {
+                    setEditId(id);
+                  }}
+                  href="/write"
+                >
                   <BorderColorIcon />
-                </button>
+                </Link>
               </div>
             )}
           </div>

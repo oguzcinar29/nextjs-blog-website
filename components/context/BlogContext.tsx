@@ -11,6 +11,8 @@ export type blogContextType = {
   setPosts: any;
   users: any;
   setUsers: any;
+  editId: string;
+  setEditId: any;
 };
 
 export const blogContextDefaultValue: blogContextType = {
@@ -20,6 +22,8 @@ export const blogContextDefaultValue: blogContextType = {
   setPosts: () => {},
   users: [],
   setUsers: () => {},
+  editId: "",
+  setEditId: () => {},
 };
 
 export const BlogContext = createContext<blogContextType>(
@@ -31,6 +35,8 @@ const BlogProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [link, setLink] = useState<string>("hey");
   const [posts, setPosts] = useState<any>([]);
+
+  const [editId, setEditId] = useState<string>("");
 
   const getAllPost = async () => {
     try {
@@ -86,6 +92,8 @@ const BlogProvider: React.FC<{ children: React.ReactNode }> = ({
     setPosts,
     setLink,
     users,
+    editId,
+    setEditId,
     setUsers,
   };
 

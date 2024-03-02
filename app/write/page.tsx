@@ -8,16 +8,26 @@ import { redirect, useRouter } from "next/navigation";
 import { FormEventHandler, useContext, useRef, useState } from "react";
 
 export default function Write() {
-  const inputFileRef = useRef<HTMLInputElement>(null);
-  const [blob, setBlob] = useState<PutBlobResult | null>(null);
+  const { editId, posts, setEditId } = useContext(BlogContext);
+  console.log(editId);
+
+  const findPost = posts.find((item: any) => item._id === editId);
+  console.log(findPost);
+
   const router = useRouter();
   const { data: session } = useSession();
 
-  const [title, setTitle] = useState<string>("");
+  const [title, setTitle] = useState<string>(
+    typeof findPost !== "undefined" ? findPost?.title : ""
+  );
 
-  const [text, setText] = useState<string>("");
+  const [text, setText] = useState<string>(
+    typeof findPost !== "undefined" ? findPost?.text : ""
+  );
 
-  const [image, setImage] = useState<string>("");
+  const [image, setImage] = useState<string>(
+    typeof findPost !== "undefined" ? findPost?.image : ""
+  );
   const [img, setImg] = useState<File>();
 
   const { setLink } = useContext(BlogContext);
@@ -44,16 +54,29 @@ export default function Write() {
       data.set("postImage", img);
       data.append("userId", userId);
 
-      const res = await fetch(`${apiURL}/api/post`, {
-        method: "POST",
-        body: data,
-      });
-      if (!res.ok) {
-        throw new Error("Failed to send data");
+      if (typeof findPost === "undefined") {
+        const res = await fetch(`${apiURL}/api/post`, {
+          method: "POST",
+          body: data,
+        });
+        if (!res.ok) {
+          throw new Error("Failed to send data");
+        } else {
+          setLink("Blog");
+          router.push("/blog");
+          router.refresh();
+        }
       } else {
-        setLink("Blog");
-        router.push("/blog");
-        router.refresh();
+        const res = await fetch(`${apiURL}/api/post/${findPost?._id}`, {
+          method: "PUT",
+          body: data,
+        });
+        if (!res.ok) {
+          throw new Error("Failed to change values");
+        } else {
+          router.push("/blog");
+          router.refresh();
+        }
       }
     } catch (err) {
       console.log(err);
@@ -93,7 +116,7 @@ export default function Write() {
               onChange={onImageChange}
             />
 
-            {image && (
+            {(image || findPost?.image) && (
               <img
                 className="w-full h-60 object-cover"
                 src={image}

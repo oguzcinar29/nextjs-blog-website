@@ -3,16 +3,20 @@ import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useContext, useState } from "react";
 import { BlogContext, blogContextType } from "../context/BlogContext";
+import { useRouter } from "next/navigation";
 
 // add admin link to manage everything from there
 
 export default function Navbar() {
-  const { link, setLink } = useContext<blogContextType>(BlogContext);
+  const { link, setLink, setEditId } = useContext<blogContextType>(BlogContext);
 
   console.log(link);
 
+  const router = useRouter();
+
   const changeHover = (e: any) => {
     const link = e.target.textContent;
+    setEditId("");
     if (link === "Oguz") {
       setLink("Homepage");
     } else {
@@ -104,7 +108,9 @@ export default function Navbar() {
           {typeof session?.user?.email !== "undefined" && (
             <button
               onClick={() => {
-                setLink("Homepage");
+                router.push("/login");
+                router.refresh();
+                setLink("Login");
                 signOut();
               }}
             >
