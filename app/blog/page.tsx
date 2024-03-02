@@ -12,7 +12,14 @@ export default function Blog() {
       const data = await fetch(`${apiURL}/api/post`, {
         cache: "no-cache",
       });
-      data.json().then((data) => setPosts(data.data));
+      if (!data.ok) {
+        throw new Error("Failed to fetch posts");
+      } else {
+        const postData = await data.json();
+        console.log(postData);
+
+        setPosts(postData.data);
+      }
     } catch (err) {
       console.log(err);
     }

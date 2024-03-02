@@ -1,6 +1,7 @@
 "use client";
 import { apiURL } from "@/url";
-import { signOut } from "next-auth/react";
+import { authOptions } from "@/utils/authOption";
+import { getSession, signOut } from "next-auth/react";
 import React, { createContext, useEffect, useState } from "react";
 
 export type blogContextType = {
@@ -36,11 +37,20 @@ const BlogProvider: React.FC<{ children: React.ReactNode }> = ({
       const data = await fetch(`${apiURL}/api/post`, {
         cache: "no-cache",
       });
-      data.json().then((data) => setPosts(data.data));
+      if (!data.ok) {
+        throw new Error("Failed to fetch posts");
+      } else {
+        const postData = await data.json();
+        console.log(postData);
+
+        setPosts(postData.data);
+      }
     } catch (err) {
       console.log(err);
     }
   };
+
+  console.log(posts);
 
   useEffect(() => {
     getAllPost();
@@ -53,7 +63,14 @@ const BlogProvider: React.FC<{ children: React.ReactNode }> = ({
       const data = await fetch(`${apiURL}/api/user`, {
         cache: "no-cache",
       });
-      data.json().then((data) => setUsers(data.data));
+      if (!data.ok) {
+        throw new Error("Failed to fetch posts");
+      } else {
+        const userData = await data.json();
+        console.log(userData);
+
+        setUsers(userData.data);
+      }
     } catch (err) {
       console.log(err);
     }
