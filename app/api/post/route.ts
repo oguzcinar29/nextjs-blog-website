@@ -1,5 +1,6 @@
 import { connectMongoDB } from "@/lib/mongodb";
 import Post from "@/models/post";
+import { put } from "@vercel/blob";
 import { writeFile } from "fs/promises";
 import { NextRequest, NextResponse } from "next/server";
 import path, { join } from "path";
@@ -26,16 +27,17 @@ export async function POST(request: NextRequest) {
     const date = data.get("date");
     const file: File | null = data.get("postImage") as unknown as File;
     const userId = data.get("userId");
+    let blob: any;
     if (typeof file.name !== "undefined") {
-      console.log("21");
-
       const bytes = await file.arrayBuffer();
       const buffer = Buffer.from(bytes);
 
       const path = join("public", "postImages", file.name);
       await writeFile(path, buffer);
+      blob = await put(file.name, file, {
+        access: "public",
+      });
     }
-    console.log(path);
 
     await connectMongoDB();
 
@@ -44,8 +46,7 @@ export async function POST(request: NextRequest) {
       text: text,
       date: date,
       userId: userId,
-      image:
-        typeof file.name !== "undefined" ? `/postImages/${file.name}` : null,
+      image: typeof file.name !== "undefined" ? blob.url : null,
     });
     return NextResponse.json(
       { message: "Post has been shared" },

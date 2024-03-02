@@ -28,7 +28,6 @@ export default function Write() {
       setImg(event.target.files[0]);
     }
   };
-  console.log(blob);
 
   const shareSubmit = async (e: any) => {
     e.preventDefault();
