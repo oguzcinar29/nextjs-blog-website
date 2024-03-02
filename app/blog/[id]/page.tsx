@@ -2,7 +2,7 @@
 import { BlogContext, blogContextType } from "@/components/context/BlogContext";
 import { useParams, useRouter } from "next/navigation";
 
-import { useContext, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import { useSession } from "next-auth/react";
@@ -12,7 +12,29 @@ import { apiURL } from "@/url";
 export default function SingleBlogPost({ params }) {
   const { id } = params;
 
-  const { posts, users } = useContext<blogContextType>(BlogContext);
+  const { users } = useContext<blogContextType>(BlogContext);
+  const [posts, setPosts] = useState<any>([]);
+
+  const getAllPost = async () => {
+    try {
+      const data = await fetch(`${apiURL}/api/post`, {
+        cache: "no-cache",
+      });
+      if (!data.ok) {
+        throw new Error("Failed to fetch posts");
+      } else {
+        const postData = await data.json();
+        console.log(postData);
+
+        setPosts(postData.data);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(() => {
+    getAllPost();
+  }, []);
   const findItem = posts.find((item: any) => item._id === id);
   const findUser = users.find((item: any) => item._id === findItem?.userId);
 

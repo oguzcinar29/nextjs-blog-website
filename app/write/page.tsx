@@ -2,11 +2,14 @@
 
 import { BlogContext } from "@/components/context/BlogContext";
 import { apiURL } from "@/url";
+import { PutBlobResult } from "@vercel/blob";
 import { useSession } from "next-auth/react";
 import { redirect, useRouter } from "next/navigation";
-import { FormEventHandler, useContext, useState } from "react";
+import { FormEventHandler, useContext, useRef, useState } from "react";
 
 export default function Write() {
+  const inputFileRef = useRef<HTMLInputElement>(null);
+  const [blob, setBlob] = useState<PutBlobResult | null>(null);
   const router = useRouter();
   const { data: session } = useSession();
 
@@ -25,6 +28,7 @@ export default function Write() {
       setImg(event.target.files[0]);
     }
   };
+  console.log(blob);
 
   const shareSubmit = async (e: any) => {
     e.preventDefault();
@@ -48,6 +52,7 @@ export default function Write() {
       if (!res.ok) {
         throw new Error("Failed to send data");
       } else {
+        setLink("Blog");
         router.push("/blog");
         router.refresh();
       }

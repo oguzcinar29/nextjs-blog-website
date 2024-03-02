@@ -2,7 +2,7 @@ import { connectMongoDB } from "@/lib/mongodb";
 import Post from "@/models/post";
 import { writeFile } from "fs/promises";
 import { NextRequest, NextResponse } from "next/server";
-import { join } from "path";
+import path, { join } from "path";
 
 export async function GET(request: NextRequest) {
   try {
@@ -35,6 +35,8 @@ export async function POST(request: NextRequest) {
       const path = join("public", "postImages", file.name);
       await writeFile(path, buffer);
     }
+    console.log(path);
+
     await connectMongoDB();
 
     await Post.create({
