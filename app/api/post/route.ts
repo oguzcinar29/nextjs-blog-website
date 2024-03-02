@@ -8,10 +8,13 @@ export async function GET(request: NextRequest) {
   try {
     await connectMongoDB();
     const data = await Post.find();
-
     return NextResponse.json({ data }, { status: 200 });
   } catch (err: any) {
     console.log(err);
+    return NextResponse.json(
+      { message: "Invalid servor request" },
+      { status: 500 }
+    );
   }
 }
 
