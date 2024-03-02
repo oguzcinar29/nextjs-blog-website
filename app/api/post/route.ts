@@ -6,6 +6,7 @@ import { join } from "path";
 
 export async function GET(request: NextRequest) {
   try {
+    await connectMongoDB();
     const data = await Post.find();
 
     return NextResponse.json({ data }, { status: 200 });
