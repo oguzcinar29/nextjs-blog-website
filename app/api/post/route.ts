@@ -1,9 +1,7 @@
 import { connectMongoDB } from "@/lib/mongodb";
 import Post from "@/models/post";
 import { put } from "@vercel/blob";
-import { writeFile } from "fs/promises";
 import { NextRequest, NextResponse } from "next/server";
-import path, { join } from "path";
 
 export async function GET(request: NextRequest) {
   try {
