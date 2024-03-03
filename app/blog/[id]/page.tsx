@@ -97,7 +97,7 @@ export default function SingleBlogPost({ params }) {
                   onClick={() => {
                     setEditId(id);
                   }}
-                  href="/write"
+                  href={`/write/${id}`}
                 >
                   <BorderColorIcon />
                 </Link>

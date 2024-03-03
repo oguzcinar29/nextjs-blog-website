@@ -78,7 +78,7 @@ export default function Register() {
           <Alert severity="error">{err}</Alert>
         </Stack>
       )}
-      <div className="flex justify-center items-center mt-20 mb-9">
+      <div className="flex justify-center items-center mt-10 h-register">
         <form
           onSubmit={registerSubmit}
           className="flex flex-col gap-6 bg-[#535C91] w-1/3 p-7 text-center rounded-sm "

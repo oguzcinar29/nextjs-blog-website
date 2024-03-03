@@ -59,7 +59,7 @@ export default function Login() {
           <Alert severity="error">{err}</Alert>
         </Stack>
       )}
-      <div className="flex justify-center items-center mt-20 mb-41">
+      <div className="flex justify-center items-center mt-5 h-login">
         <form
           onSubmit={loginSubmit}
           className="flex flex-col gap-6 bg-[#535C91] w-1/3 p-7 text-center rounded-sm "

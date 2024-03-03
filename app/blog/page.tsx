@@ -29,7 +29,7 @@ export default function Blog() {
   }, []);
 
   return (
-    <div className=" w-full max-h-full pt-10 pb-10">
+    <div className=" w-full max-h-full pt-10 pb-10 min-h-full">
       <div className="flex gap-20 flex-wrap  justify-between">
         {posts?.map((item: any, i: number) => {
           return <Posts key={i} {...item} />;

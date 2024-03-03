@@ -7,10 +7,10 @@ export default function Home() {
   const { data: session } = useSession();
 
   return (
-    <div className="mt-12 mb-15.5">
+    <div className="mt-12 h-homepage">
       <div className="flex justify-between items-center gap-10 ">
-        <div className="w-7/12 flex flex-col gap-5">
-          <h1 className="text-white text-7xl font-extrabold leading-tight">
+        <div className="800:min-w-full w-7/12 flex flex-col gap-5 ">
+          <h1 className="500:text-6xl text-white  text-7xl font-extrabold leading-tight">
             Creative Thoughts Agency.
           </h1>
           <p className="leading-snug font-light">
@@ -41,7 +41,7 @@ export default function Home() {
         </div>
         <div className="w-5/12">
           <img
-            className="bg-transparent"
+            className="800:hidden"
             src="https://github.com/safak/next14-tutorial/blob/main/public/hero.gif?raw=true"
             alt=""
           />

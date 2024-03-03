@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import { join } from "path";
 import { writeFile } from "fs/promises";
+import { put } from "@vercel/blob";
 
 const saltRounds = 11;
 
@@ -16,17 +17,13 @@ export async function POST(request: NextRequest) {
     const name = data.get("name") as string;
     const file: File | null = data.get("file") as unknown as File;
 
-    console.log(typeof file.name);
-
+    let blob: any;
     if (typeof file.name !== "undefined") {
-      console.log("21");
-
-      const bytes = await file.arrayBuffer();
-      const buffer = Buffer.from(bytes);
-
-      const path = join("public", "images", file.name);
-      await writeFile(path, buffer);
+      blob = await put(file.name, file, {
+        access: "public",
+      });
     }
+
     await connectMongoDB();
     const newPass = await bcrypt.hash(password, saltRounds);
 
@@ -43,7 +40,7 @@ export async function POST(request: NextRequest) {
         name: name,
         email: email,
         password: newPass,
-        image: typeof file.name !== "undefined" ? `/images/${file.name}` : null,
+        image: typeof file.name !== "undefined" ? blob.url : null,
       });
       return NextResponse.json({ message: "User created" }, { status: 200 });
     }

@@ -6,6 +6,7 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+
   theme: {
     extend: {
       backgroundImage: {
@@ -13,9 +14,21 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      screens: {
+        "800": { raw: "(max-width:800px)" },
+        "500": { raw: "(max-width:500px)" },
+        "1000": { raw: "(max-width:1000px)" },
+        "1000-min": { raw: "(min-width:1000px)" },
+      },
       height: {
         "128": "32rem",
         halfmore: "81vh",
+        homepage: "74.5vh",
+        login: "78.2vh",
+        contact: "70.2vh",
+        register: "75.5vh",
+        write: "68vh",
+        about: "72.2vh",
       },
       margin: {
         "15.5": "62px",

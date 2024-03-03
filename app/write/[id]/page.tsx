@@ -1,22 +1,15 @@
 "use client";
-
 import { BlogContext } from "@/components/context/BlogContext";
 import { apiURL } from "@/url";
-import { PutBlobResult } from "@vercel/blob";
 import { useSession } from "next-auth/react";
-import { redirect, useRouter } from "next/navigation";
-import {
-  FormEventHandler,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { useRouter } from "next/navigation";
+import { useContext, useEffect, useState } from "react";
 
-export default function Write() {
-  const { editId, setEditId } = useContext(BlogContext);
-
+export default function page({ params }) {
+  const { id } = params;
+  console.log(id);
   const [posts, setPosts] = useState<any>([]);
+  console.log("Edit Post");
 
   const getAllPost = async () => {
     try {
@@ -38,24 +31,17 @@ export default function Write() {
   useEffect(() => {
     getAllPost();
   }, []);
-
-  const findPost = posts.find((item: any) => item._id === editId);
+  const findPost = posts.find((item: any) => item._id === id);
   console.log(findPost);
 
   const router = useRouter();
   const { data: session } = useSession();
 
-  const [title, setTitle] = useState<string>(
-    typeof findPost !== "undefined" ? findPost?.title : ""
-  );
+  const [title, setTitle] = useState<string>(findPost?.title);
 
-  const [text, setText] = useState<string>(
-    typeof findPost !== "undefined" ? findPost?.text : ""
-  );
+  const [text, setText] = useState<string>(findPost?.text);
 
-  const [image, setImage] = useState<string>(
-    typeof findPost !== "undefined" ? findPost?.image : ""
-  );
+  const [image, setImage] = useState<string>(findPost?.image);
   const [img, setImg] = useState<File>();
 
   const { setLink } = useContext(BlogContext);
@@ -70,9 +56,6 @@ export default function Write() {
   const shareSubmit = async (e: any) => {
     e.preventDefault();
     const userId = session?.user?.id;
-    console.log(userId);
-    console.log(title, text, img);
-
     try {
       const date = new Date().toLocaleString();
       const data = new FormData();
@@ -82,35 +65,21 @@ export default function Write() {
       data.set("postImage", img);
       data.append("userId", userId);
 
-      if (typeof findPost === "undefined") {
-        const res = await fetch(`${apiURL}/api/post`, {
-          method: "POST",
-          body: data,
-        });
-        if (!res.ok) {
-          throw new Error("Failed to send data");
-        } else {
-          setLink("Blog");
-          router.push("/blog");
-          router.refresh();
-        }
+      const res = await fetch(`${apiURL}/api/post/${findPost?._id}`, {
+        method: "PUT",
+        body: data,
+      });
+      if (!res.ok) {
+        throw new Error("Failed to change values");
       } else {
-        const res = await fetch(`${apiURL}/api/post/${findPost?._id}`, {
-          method: "PUT",
-          body: data,
-        });
-        if (!res.ok) {
-          throw new Error("Failed to change values");
-        } else {
-          router.push("/blog");
-          router.refresh();
-        }
+        setLink("Blog");
+        router.push("/blog");
+        router.refresh();
       }
     } catch (err) {
       console.log(err);
     }
   };
-
   return (
     <div className="h-write mt-24">
       <form onSubmit={shareSubmit} className="flex gap-10">
@@ -121,6 +90,7 @@ export default function Write() {
             placeholder="Title"
             name="title"
             id=""
+            defaultValue={findPost?.title}
             value={title}
             onChange={(e: any) => setTitle(e.target.value)}
           />
@@ -132,6 +102,7 @@ export default function Write() {
             placeholder="Text"
             cols={30}
             rows={10}
+            defaultValue={findPost?.text}
             value={text}
           ></textarea>
         </div>
@@ -147,7 +118,7 @@ export default function Write() {
             {(image || findPost?.image) && (
               <img
                 className="w-full h-60 object-cover"
-                src={image}
+                src={image ? image : findPost?.image}
                 alt="image"
               />
             )}

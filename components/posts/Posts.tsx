@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-interface PostType {
+export interface PostType {
   _id: string;
   title: string;
   text: string;
