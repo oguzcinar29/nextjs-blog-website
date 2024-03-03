@@ -45,8 +45,10 @@ export default function Blog() {
   };
 
   useEffect(() => {
-    getAllPost();
-    getAllUsers();
+    setInterval(() => {
+      getAllPost();
+      getAllUsers();
+    }, 1000);
   }, []);
 
   return (
