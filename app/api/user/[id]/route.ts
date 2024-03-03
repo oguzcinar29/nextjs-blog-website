@@ -1,5 +1,6 @@
 import { connectMongoDB } from "@/lib/mongodb";
-import User from "@/models/user";
+import BlogUser from "@/models/user";
+
 import { NextRequest, NextResponse } from "next/server";
 
 export async function DELETE(request: NextRequest, { params }: any) {
@@ -7,7 +8,7 @@ export async function DELETE(request: NextRequest, { params }: any) {
   console.log(id);
   try {
     await connectMongoDB();
-    await User.findByIdAndDelete(id);
+    await BlogUser.findByIdAndDelete(id);
     return NextResponse.json({ message: "User deleted" }, { status: 200 });
   } catch (err) {
     console.log(err);

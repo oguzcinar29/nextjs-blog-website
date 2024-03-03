@@ -37,7 +37,7 @@ export default function SingleBlogPost({ params }) {
   const getAllUsers = async () => {
     try {
       const data = await fetch(`${apiURL}/api/user`, {
-        next: { revalidate: 1 },
+        cache: "no-cache",
       });
       if (!data.ok) {
         throw new Error("Failed to fetch posts");
