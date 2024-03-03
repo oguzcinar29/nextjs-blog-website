@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 
-export default function page({ params }) {
+export default function EditPost({ params }) {
   const { id } = params;
   console.log(id);
   const [posts, setPosts] = useState<any>([]);
