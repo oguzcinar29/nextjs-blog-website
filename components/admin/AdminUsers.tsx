@@ -15,6 +15,7 @@ export default function AdminUsers(props: {
     try {
       const res = await fetch(`${apiURL}/api/user/${props._id}`, {
         method: "DELETE",
+        cache: "no-cache",
       });
       if (!res.ok) {
         throw new Error("Failed to delete post");

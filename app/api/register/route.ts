@@ -11,6 +11,7 @@ const saltRounds = 11;
 export async function POST(request: NextRequest) {
   try {
     const data = await request.formData();
+    console.log(data);
 
     const password = data.get("password") as string;
     const email = data.get("email") as string;
