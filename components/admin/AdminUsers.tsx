@@ -12,14 +12,18 @@ export default function AdminUsers(props: {
 }) {
   const router = useRouter();
   const deletePost = async () => {
+    console.log("clicked delete");
+
     try {
       const res = await fetch(`${apiURL}/api/user/${props._id}`, {
         method: "DELETE",
-        cache: "no-cache",
       });
       if (!res.ok) {
         throw new Error("Failed to delete post");
       } else {
+        console.log("refresh here");
+        console.log(res.status);
+
         router.refresh();
       }
     } catch (err) {
