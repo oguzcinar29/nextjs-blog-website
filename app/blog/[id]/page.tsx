@@ -57,8 +57,9 @@ export default function SingleBlogPost({ params }) {
     getAllPost();
     getAllUsers();
   }, []);
-  const findItem = posts.find((item: any) => item._id === id);
-  const findUser = users.find((item: any) => item._id === findItem?.userId);
+  const findItem = posts?.find((item: any) => item._id === id);
+  const findUser = users?.find((item: any) => item._id === findItem?.userId);
+  console.log(findUser);
 
   const router = useRouter();
   const { data: session } = useSession();
