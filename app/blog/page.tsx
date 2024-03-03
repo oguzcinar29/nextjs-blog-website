@@ -24,8 +24,29 @@ export default function Blog() {
       console.log(err);
     }
   };
+  const [users, setUsers] = useState<any>([]);
+
+  const getAllUsers = async () => {
+    try {
+      const data = await fetch(`${apiURL}/api/user`, {
+        cache: "no-cache",
+      });
+      if (!data.ok) {
+        throw new Error("Failed to fetch posts");
+      } else {
+        const userData = await data.json();
+        console.log(userData);
+
+        setUsers(userData.data);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     getAllPost();
+    getAllUsers();
   }, []);
 
   return (

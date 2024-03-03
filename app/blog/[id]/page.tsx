@@ -14,7 +14,6 @@ import { set } from "mongoose";
 export default function SingleBlogPost({ params }) {
   const { id } = params;
 
-  const { users } = useContext<blogContextType>(BlogContext);
   const [posts, setPosts] = useState<any>([]);
 
   const getAllPost = async () => {
@@ -34,8 +33,29 @@ export default function SingleBlogPost({ params }) {
       console.log(err);
     }
   };
+  const [users, setUsers] = useState<any>([]);
+
+  const getAllUsers = async () => {
+    try {
+      const data = await fetch(`${apiURL}/api/user`, {
+        cache: "no-cache",
+      });
+      if (!data.ok) {
+        throw new Error("Failed to fetch posts");
+      } else {
+        const userData = await data.json();
+        console.log(userData);
+
+        setUsers(userData.data);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     getAllPost();
+    getAllUsers();
   }, []);
   const findItem = posts.find((item: any) => item._id === id);
   const findUser = users.find((item: any) => item._id === findItem?.userId);
