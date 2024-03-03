@@ -58,11 +58,13 @@ export default function Register() {
       const res = await fetch(`${apiURL}/api/register`, {
         method: "POST",
         body: data,
+        cache: "no-cache",
       });
       if (!res.ok) {
         res.json().then((message) => setErr(message.message));
       } else {
         router.push("/login");
+        router.refresh();
       }
     } catch (err) {
       console.log(err);

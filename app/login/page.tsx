@@ -8,6 +8,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { BlogContext, blogContextType } from "@/components/context/BlogContext";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
+import { apiURL } from "@/url";
 type infoType = {
   email: string;
   password: string;
@@ -20,6 +21,30 @@ export default function Login() {
     email: "",
     password: "",
   });
+
+  const [users, setUsers] = useState<any>([]);
+
+  const getAllUsers = async () => {
+    try {
+      const data = await fetch(`${apiURL}/api/user`, {
+        cache: "no-cache",
+      });
+      if (!data.ok) {
+        throw new Error("Failed to fetch posts");
+      } else {
+        const userData = await data.json();
+        console.log(userData);
+
+        setUsers(userData.data);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getAllUsers();
+  }, []);
 
   const router = useRouter();
 

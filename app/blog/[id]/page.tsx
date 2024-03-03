@@ -25,7 +25,6 @@ export default function SingleBlogPost({ params }) {
         throw new Error("Failed to fetch posts");
       } else {
         const postData = await data.json();
-        console.log(postData);
 
         setPosts(postData.data);
       }
@@ -38,7 +37,7 @@ export default function SingleBlogPost({ params }) {
   const getAllUsers = async () => {
     try {
       const data = await fetch(`${apiURL}/api/user`, {
-        cache: "no-cache",
+        next: { revalidate: 1 },
       });
       if (!data.ok) {
         throw new Error("Failed to fetch posts");
@@ -58,7 +57,7 @@ export default function SingleBlogPost({ params }) {
     getAllUsers();
   }, []);
   const findItem = posts?.find((item: any) => item._id === id);
-  const findUser = users?.find((item: any) => item._id === id);
+  const findUser = users?.find((item: any) => item._id === findItem?.userId);
   console.log(findUser);
 
   const router = useRouter();

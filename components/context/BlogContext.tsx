@@ -56,12 +56,6 @@ const BlogProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   };
 
-  console.log(posts);
-
-  useEffect(() => {
-    getAllPost();
-  }, []);
-
   const [users, setUsers] = useState<any>([]);
 
   const getAllUsers = async () => {
@@ -81,8 +75,8 @@ const BlogProvider: React.FC<{ children: React.ReactNode }> = ({
       console.log(err);
     }
   };
-
   useEffect(() => {
+    getAllPost();
     getAllUsers();
   }, []);
 

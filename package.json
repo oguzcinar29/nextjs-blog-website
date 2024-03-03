@@ -24,7 +24,8 @@
     "next-auth": "^4.24.6",
     "react": "^18",
     "react-dom": "^18",
-    "styled-components": "^6.1.8"
+    "styled-components": "^6.1.8",
+    "swr": "^2.2.5"
   },
   "devDependencies": {
     "@types/es6-promise": "^3.3.0",
