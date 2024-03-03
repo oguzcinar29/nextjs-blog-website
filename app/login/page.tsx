@@ -32,10 +32,7 @@ export default function Login() {
       if (!data.ok) {
         throw new Error("Failed to fetch posts");
       } else {
-        const userData = await data.json();
-        console.log(userData);
-
-        setUsers(userData.data);
+        return await data.json();
       }
     } catch (err) {
       console.log(err);
@@ -43,8 +40,10 @@ export default function Login() {
   };
 
   useEffect(() => {
-    getAllUsers();
+    getAllUsers().then((data) => setUsers(data.data));
   }, []);
+
+  console.log(users);
 
   const router = useRouter();
 
