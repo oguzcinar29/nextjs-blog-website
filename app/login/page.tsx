@@ -27,7 +27,7 @@ export default function Login() {
   const getAllUsers = async () => {
     try {
       const data = await fetch(`${apiURL}/api/user`, {
-        cache: "no-cache",
+        cache: "no-store",
       });
       if (!data.ok) {
         throw new Error("Failed to fetch posts");
