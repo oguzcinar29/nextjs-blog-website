@@ -5,7 +5,8 @@ import { DefaultSession, SessionStrategy } from "next-auth";
 import { connectMongoDB } from "@/lib/mongodb";
 
 import bcrypt from "bcrypt";
-import BlogUser from "@/models/user";
+
+import User from "@/models/user";
 
 declare module "next-auth" {
   interface Session {
@@ -31,7 +32,7 @@ export const authOptions = {
 
         try {
           await connectMongoDB();
-          const user = await BlogUser.findOne({ email });
+          const user = await User.findOne({ email });
           console.log(user);
 
           if (!user) {

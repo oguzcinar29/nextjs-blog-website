@@ -1,12 +1,11 @@
 import { connectMongoDB } from "@/lib/mongodb";
-import BlogUser from "@/models/user";
-
+import User from "@/models/user";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
   try {
     await connectMongoDB();
-    const data = await BlogUser.find();
+    const data = await User.find();
     console.log(data);
 
     return NextResponse.json({ data }, { status: 200 });

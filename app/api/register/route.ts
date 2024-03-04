@@ -5,7 +5,6 @@ import bcrypt from "bcrypt";
 import { join } from "path";
 import { writeFile } from "fs/promises";
 import { put } from "@vercel/blob";
-import BlogUser from "@/models/user";
 
 const saltRounds = 11;
 
@@ -29,7 +28,7 @@ export async function POST(request: NextRequest) {
     await connectMongoDB();
     const newPass = await bcrypt.hash(password, saltRounds);
 
-    const findEmail = BlogUser.find({ email });
+    const findEmail = User.find({ email });
     if ((await findEmail).length !== 0) {
       console.log("hey3");
 
@@ -38,7 +37,7 @@ export async function POST(request: NextRequest) {
         { status: 422 }
       );
     } else {
-      await BlogUser.create({
+      await User.create({
         name: name,
         email: email,
         password: newPass,
