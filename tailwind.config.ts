@@ -17,6 +17,9 @@ const config: Config = {
       screens: {
         "800": { raw: "(max-width:800px)" },
         "500": { raw: "(max-width:500px)" },
+        "400": { raw: "(max-width:400px)" },
+        "700": { raw: "(max-width:700px)" },
+        "600": { raw: "(max-width:600px)" },
         "1000": { raw: "(max-width:1000px)" },
         "1000-min": { raw: "(min-width:1000px)" },
       },

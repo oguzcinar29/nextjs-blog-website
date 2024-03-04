@@ -3,12 +3,12 @@ export default function page() {
     <div className="flex mt-20 h-contact ">
       <div>
         <img
-          className="w-4/5 "
+          className="w-4/5 1000:hidden "
           src="https://github.com/safak/next14-tutorial/blob/main/public/contact.png?raw=true"
           alt=""
         />
       </div>
-      <div className="flex flex-col justify-around mr-7 w-full gap-3">
+      <div className="flex flex-col  mr-7 w-full gap-5">
         <input
           type="text"
           className="p-3 rounded-sm bg-[#535C91]"

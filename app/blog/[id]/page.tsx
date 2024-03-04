@@ -81,17 +81,17 @@ export default function SingleBlogPost({ params }) {
   };
 
   return (
-    <div className="pt-10 pb-20 h-halfmore">
-      <div className="flex justify-between gap-10">
-        <div className="flex w-1/3 h-full">
+    <div className="pt-10 pb-20 h-halfmore 500:mb-60 ">
+      <div className=" 1000:w-full flex justify-between gap-10 1000:flex-col   ">
+        <div className="flex w-1/3 h-full 1000:w-2/3">
           <img
-            className="max-w-full max-h-full  object-cover"
+            className="max-w-full max-h-full  object-cover 1000:min-w-64 text"
             src={findItem?.image}
             alt=""
           />
         </div>
-        <div className="flex flex-col gap-10 w-2/3">
-          <h1 className="text-5xl font-bold">{findItem?.title}</h1>
+        <div className="flex flex-col gap-10 w-2/3 1000:w-full">
+          <h1 className="  text-5xl font-bold">{findItem?.title}</h1>
           <div className="flex gap-5">
             <Stack direction="row" spacing={2}>
               <Avatar

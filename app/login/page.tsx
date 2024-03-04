@@ -67,9 +67,15 @@ export default function Login() {
         setErr("Invalid Value! Try Again.");
         return;
       } else {
-        setLink("Homepage");
-        router.push("/");
-        router.refresh();
+        if (link === "Blog") {
+          setLink("Blog");
+          router.push("/blog");
+          router.refresh();
+        } else {
+          setLink("Homepage");
+          router.push("/");
+          router.refresh();
+        }
       }
     } catch (err) {
       console.log(err);
@@ -83,11 +89,16 @@ export default function Login() {
           <Alert severity="error">{err}</Alert>
         </Stack>
       )}
-      <div className="flex justify-center items-center mt-5 h-login">
+      <div className="flex justify-center items-center mt-5 h-login ">
         <form
           onSubmit={loginSubmit}
-          className="flex flex-col gap-6 bg-[#535C91] w-1/3 p-7 text-center rounded-sm "
+          className="flex flex-col gap-6 bg-[#535C91] w-1/3 p-7 text-center rounded-sm  min-w-96 "
         >
+          <span>
+            {link === "Blog"
+              ? "You have to login first to be able to see blog posts"
+              : ""}
+          </span>
           <h1 className="text-3xl font-extrabold">Login</h1>
 
           <input

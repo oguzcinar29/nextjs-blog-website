@@ -69,7 +69,7 @@ export default function EditPost({ params }) {
         data.set("title", findPost?.title);
       }
       if (data.get("text") === "undefined") {
-        data.set("title", findPost?.text);
+        data.set("text", findPost?.text);
       }
 
       const res = await fetch(`${apiURL}/api/post/${findPost?._id}`, {

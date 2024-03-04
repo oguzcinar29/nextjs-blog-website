@@ -1,7 +1,7 @@
 "use client";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { BlogContext, blogContextType } from "../context/BlogContext";
 import { useRouter } from "next/navigation";
 import Box from "@mui/material/Box";
@@ -42,6 +42,9 @@ export default function Navbar() {
   const { data: session } = useSession();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
+
+  console.log(session);
+
   const handleClose = () => setOpen(false);
   return (
     <nav>

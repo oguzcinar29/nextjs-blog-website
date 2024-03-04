@@ -83,7 +83,7 @@ export default function Register() {
       <div className="flex justify-center items-center mt-10 h-register">
         <form
           onSubmit={registerSubmit}
-          className="flex flex-col gap-6 bg-[#535C91] w-1/3 p-7 text-center rounded-sm "
+          className="flex flex-col gap-6 min-w-96 bg-[#535C91] w-1/3 p-7 text-center rounded-sm "
         >
           <h1 className="text-3xl font-extrabold">Register</h1>
           <input type="file" name="file" onChange={handleFileUpload} />

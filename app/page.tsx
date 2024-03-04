@@ -7,8 +7,8 @@ export default function Home() {
   const { data: session } = useSession();
 
   return (
-    <div className="mt-12 h-homepage">
-      <div className="flex justify-between items-center gap-10 ">
+    <div className="mt-12 h-homepage 800:pt-32  ">
+      <div className="flex justify-between 800:justify-center items-center gap-10 ">
         <div className="800:min-w-full w-7/12 flex flex-col gap-5 ">
           <h1 className="500:text-6xl text-white  text-7xl font-extrabold leading-tight">
             Creative Thoughts Agency.

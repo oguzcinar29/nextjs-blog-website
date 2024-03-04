@@ -112,8 +112,11 @@ export default function Write() {
   };
 
   return (
-    <div className="h-write mt-24">
-      <form onSubmit={shareSubmit} className="flex gap-10">
+    <div className="h-write mt-24 ">
+      <form
+        onSubmit={shareSubmit}
+        className="flex gap-10  1000:flex-col 1000:justify-center 1000:items-center"
+      >
         <div className="flex flex-col gap-6 w-4/5">
           <input
             className="bg-[#1B1A55] text-white p-3 "

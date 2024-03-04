@@ -11,7 +11,7 @@ export interface PostType {
 
 export default function Posts(props: PostType) {
   return (
-    <div className="w-1/4 flex flex-col gap-4">
+    <div className="w-1/4 flex flex-col gap-4  min-w-60 ">
       {props.image !== null && (
         <img className="w-72 h-72 object-cover" src={props.image} alt="" />
       )}
