@@ -25,15 +25,13 @@ export async function PUT(request: NextRequest, { params }: any) {
   const file: File | null = data.get("postImage") as unknown as File;
   const userId = data.get("userId");
 
-  console.log(file);
-
   let blob: any;
   if (typeof file.name !== "undefined") {
     blob = await put(file.name, file, {
       access: "public",
     });
   }
-  console.log(blob);
+
   let oldImg: any;
   if (typeof blob === "undefined") {
     const post = await Post.findById(id);
@@ -43,7 +41,7 @@ export async function PUT(request: NextRequest, { params }: any) {
 
   try {
     await connectMongoDB();
-    const hey = await Post.findByIdAndUpdate(id, {
+    await Post.findByIdAndUpdate(id, {
       title: title,
       text: text,
       date: date,

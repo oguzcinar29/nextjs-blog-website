@@ -64,6 +64,13 @@ export default function EditPost({ params }) {
       data.append("date", date);
       data.set("postImage", img);
       data.append("userId", userId);
+      if (data.get("title") === "undefined") {
+        console.log("hey");
+        data.set("title", findPost?.title);
+      }
+      if (data.get("text") === "undefined") {
+        data.set("title", findPost?.text);
+      }
 
       const res = await fetch(`${apiURL}/api/post/${findPost?._id}`, {
         method: "PUT",

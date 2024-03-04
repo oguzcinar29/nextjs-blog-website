@@ -9,7 +9,6 @@ export async function GET(request: NextRequest) {
       path: "creator",
       options: { strictPopulate: false },
     });
-    console.log(data);
 
     return NextResponse.json({ data }, { status: 200 });
   } catch (err: any) {
