@@ -13,6 +13,7 @@ const UserSchema: Schema = new Schema(
     email: { type: String, required: true },
     password: { type: String, required: true },
     image: { type: String, required: false },
+    creator: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   },
   { timestamps: true }
 );

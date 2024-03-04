@@ -5,7 +5,10 @@ export const dynamic = "force-dynamic";
 export async function GET(request: NextRequest) {
   try {
     await connectMongoDB();
-    const data = await User.find({}).populate("creator");
+    const data = await User.find().populate({
+      path: "creator",
+      options: { strictPopulate: false },
+    });
     console.log(data);
 
     return NextResponse.json({ data }, { status: 200 });
