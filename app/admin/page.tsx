@@ -47,10 +47,12 @@ export default function Admin() {
   console.log(users);
 
   useEffect(() => {
-    getAllUsers();
-    getAllPost();
-
+    const id = setInterval(() => {
+      getAllUsers();
+      getAllPost();
+    }, 1000);
     console.log("use efect");
+    return () => clearInterval(id);
   }, []);
 
   return (
