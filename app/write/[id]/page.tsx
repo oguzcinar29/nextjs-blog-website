@@ -88,9 +88,12 @@ export default function EditPost({ params }) {
     }
   };
   return (
-    <div className="h-write mt-24">
-      <form onSubmit={shareSubmit} className="flex gap-10">
-        <div className="flex flex-col gap-6 w-4/5">
+    <div className="h-write mt-24 500:mb-96 500:w-full  ">
+      <form
+        onSubmit={shareSubmit}
+        className="flex gap-10 500:flex 500:flex-col "
+      >
+        <div className="flex flex-col gap-6 500:w-full w-4/5 500:flex-col">
           <input
             className="bg-[#1B1A55] text-white p-3 "
             type="text"

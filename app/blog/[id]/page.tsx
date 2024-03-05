@@ -81,7 +81,7 @@ export default function SingleBlogPost({ params }) {
   };
 
   return (
-    <div className="pt-10 pb-20 h-halfmore 500:mb-60 ">
+    <div className="pt-10 pb-20 h-halfmore 500:mb-128 ">
       <div className=" 1000:w-full flex justify-between gap-10 1000:flex-col   ">
         <div className="flex w-1/3 h-full 1000:w-2/3">
           <img
