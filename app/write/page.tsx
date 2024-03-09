@@ -112,12 +112,12 @@ export default function Write() {
   };
 
   return (
-    <div className="h-write mt-24 ">
+    <div className="h-write mt-24  400:h-full">
       <form
         onSubmit={shareSubmit}
         className="flex gap-10  1000:flex-col 1000:justify-center 1000:items-center"
       >
-        <div className="flex flex-col gap-6 w-4/5">
+        <div className="flex flex-col gap-6 w-4/5 700:w-screen 700:pr-3 700:pl-3">
           <input
             className="bg-[#1B1A55] text-white p-3 "
             type="text"
@@ -127,6 +127,7 @@ export default function Write() {
             value={title}
             onChange={(e: any) => setTitle(e.target.value)}
           />
+
           <textarea
             onChange={(e) => setText(e.target.value)}
             name=""
@@ -138,7 +139,7 @@ export default function Write() {
             value={text}
           ></textarea>
         </div>
-        <div className="flex flex-col gap-3 ">
+        <div className="flex flex-col gap-3">
           <div className="flex flex-col gap-1 ">
             <input
               type="file"
@@ -149,7 +150,7 @@ export default function Write() {
 
             {(image || findPost?.image) && (
               <img
-                className="w-full h-60 object-cover"
+                className="w-full h-60 object-cover "
                 src={image}
                 alt="image"
               />

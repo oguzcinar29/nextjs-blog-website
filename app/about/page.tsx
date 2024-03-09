@@ -1,6 +1,6 @@
 export default function About() {
   return (
-    <div className="mt-16 h-about 400:mb-32 800:pt-14">
+    <div className="mt-16 h-about 400:mb-72 800:pt-14">
       <div className=" flex justify-between items-center gap-10 ">
         <div className=" 800:min-w-full w-7/12 flex flex-col gap-7 ">
           <h3 className="600:text-3xl text-[#535C91] text-2xl font-extrabold ">
